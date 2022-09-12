@@ -1,3 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Gaegu&family=JetBrains+Mono&family=Press+Start+2P&family=Silkscreen&display=swap');
+
+:root {
+  --main-purple: rgb(255, 115, 255);
+  --main-blue: rgb(86, 125, 255);
+}
+
 *,
 *::before,
 *::after {
@@ -6,6 +13,152 @@
   box-sizing: border-box;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 body {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'JetBrains Mono', monospace;
+  background-color: black;
 }
+
+header {
+  padding: 50px 10px 10px;
+}
+
+h1 {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.85rem;
+  word-spacing: -.55rem;
+  color: white;
+  text-shadow: 4px 2px var(--main-blue), -4px -2px var(--main-purple);
+}
+
+h1:hover {
+  text-shadow: 4px 2px var(--main-purple), -4px -2px var(--main-blue);
+}
+
+.display {
+  height: 20vh;
+}
+
+.display-text {
+  color: white;
+  font-size: 1.35rem;
+  font-family: 'Gaegu', cursive;
+}
+
+.display-text > span {
+  color: var(--main-blue);
+  font-size: 2.8rem;
+  font-family: 'Silkscreen', cursive;
+}
+
+.board-container {
+  flex: 1;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.board div:nth-of-type(3n + 1),
+.board div:nth-of-type(3n + 2) {
+  border-right: 2px solid white;
+}
+
+.board div:nth-of-type(-n + 6) {
+  border-bottom: 2px solid white;
+}
+
+.cell {
+  width: 85px;
+  height: 85px;
+  color: var(--main-blue);
+  font-family: 'Silkscreen', cursive;
+  font-size: 1.7rem;
+  cursor: pointer;
+}
+
+.controls {
+  height: 20vh;
+  margin-bottom: 25px;
+}
+
+.controls button {
+  border: none;
+  border-top: 4px solid var(--main-purple);
+  border-bottom: 4px solid var(--main-blue);
+  padding: 15px 24px;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+  word-spacing: -.5rem;
+  cursor: pointer;
+  animation: beat .75s infinite alternate-reverse;
+}
+
+.controls button:hover {
+  animation: mouse-in 1.5s forwards;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes mouse-in {
+  from {
+    border: 5px double transparent;
+  }
+  to {
+    border-width: 5px;
+    border-style: double;
+    border-color: var(--main-purple) var(--main-purple) var(--main-blue) var(--main-blue);
+    font-size: 1.15rem;
+  }
+}
+
+/* @keyframes mouse-out {
+  from {
+    border: 5px double transparent;
+  }
+  to {
+    border-top: 4px solid var(--main-purple);
+    border-bottom: 4px solid var(--main-blue);
+    font-size: 1rem;
+  }
+} */
+
+footer {
+  height: 6vh;
+  gap: 10px;
+  padding-bottom: 10px;
+  color: white;
+  font-size: .95rem;
+}
+
+.copyright-icon {
+  font-size: 1.75rem;
+  vertical-align: sub;
+  font-family: monospace;
+  font-weight: bold;
+}
+
+.fa-github {
+  color: white;
+  transition: 1.25s;
+}
+
+.fa-github:hover {
+  transform: rotate(720deg);
+}
+

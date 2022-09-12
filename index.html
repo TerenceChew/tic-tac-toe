@@ -4,11 +4,53 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles.css">
   <script src="./index.js" defer></script>
   <title>Tic Tac Toe</title>
 </head>
 <body>
-  <h1>Hello there!</h1>
+  <header class="center">
+    <h1>TIC TAC TOE</h1>
+  </header>
+
+  <div class="display center">
+    <p class="display-text">
+      PLAYER
+      <span class="animate__animated animate__flash animate__repeat-2">X</span>'s
+      TURN
+    </p>
+  </div>
+
+  <div class="board-container center">
+    <div class="board animate__animated animate__rotateIn">
+      <div class="cell center">X</div>
+      <div class="cell center">1</div>
+      <div class="cell center">2</div>
+      <div class="cell center">3</div>
+      <div class="cell center">4</div>
+      <div class="cell center">5</div>
+      <div class="cell center">6</div>
+      <div class="cell center">7</div>
+      <div class="cell center">8</div>
+    </div>
+  </div>
+
+  <div class="controls center">
+    <button>NEW GAME</button>
+  </div>
+  
+  <footer class="center">
+    <p>
+      Copyright
+      <span class="copyright-icon">&copy;</span>
+      <span class="curr-year"></span>
+      Terence
+    </p>
+    <a href="https://github.com/TerenceChew">
+      <i class="fa fa-github" style="font-size:36px"></i>
+    </a>
+  </footer>
 </body>
 </html>
