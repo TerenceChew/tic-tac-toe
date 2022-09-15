@@ -94,12 +94,14 @@ const gameController = (() => {
   }
   const addEventListenerToCells = () => {
     cells.forEach(cell => {
-      cell.addEventListener('pointerup', handleCellClick)
+      cell.style.cursor = 'pointer';
+      cell.addEventListener('pointerup', handleCellClick);
     })
   }
   const removeEventListenerFromCells = () => {
     cells.forEach(cell => {
-      cell.removeEventListener('pointerup', handleCellClick)
+      cell.style.cursor = 'not-allowed';
+      cell.removeEventListener('pointerup', handleCellClick);
     })
   }
   const startNewRound = () => {
@@ -189,11 +191,11 @@ const gameController = (() => {
   }
 })();
 
-
-
 // Factories
-// const createPlayer = () => {
-
+// const createAI = () => {
+//   const makeNextMove = (board) => {
+    
+//   }
 // }
 
 // Setups
