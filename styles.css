@@ -63,6 +63,7 @@ h1:hover {
   color: white;
   font-size: 1.15rem;
   font-family: 'Silkscreen', cursive;
+  text-align: center;
 }
 
 .display-text > span {
@@ -112,14 +113,15 @@ h1:hover {
   background-color: transparent;
   word-spacing: -.5rem;
   cursor: pointer;
-  animation: w-100 4s linear 1s forwards,
-             cycle-color .75s linear infinite alternate-reverse;
+  color: white;
+  transition: 1s;
+  animation: w-100 2s linear 1s forwards;
 }
 
 .controls button:hover {
-  animation: w-100 4s linear 1s forwards,
-             show-border 1.25s linear forwards;
-  color: white;
+  animation: w-100 2s linear 1s forwards,
+             cycle-color .65s linear infinite alternate-reverse;
+  transform: scale(1.15);
 }
 
 @keyframes cycle-color {
@@ -156,17 +158,18 @@ footer {
 
 /* Name form */
 .player-name-form {
-  /* display: none; */
-  height: min(355px, 80vh);
-  width: 260px;
-  gap: 60px;
+  display: none;
+  height: min(365px, 80vh);
+  width: 270px;
+  gap: 64px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 25px 10px;
   background-color: var(--bg-1);
-  animation: show-border 2.5s linear forwards;
+  animation: show-border 2s linear forwards;
+  overflow-y: scroll;
 }
 
 @keyframes show-border {
@@ -242,14 +245,15 @@ footer {
   text-align: center;
   letter-spacing: 1px;
   cursor: pointer;
-  animation: w-100 3s linear 2.5s forwards,
-             cycle-color .75s linear infinite alternate-reverse;
+  color: white;
+  transition: 1s;
+  animation: w-100 2s linear 2s forwards;
 }
 
 .form-btn:hover {
-  animation: w-100 3s linear 2.5s forwards,
-             show-border 1.25s linear forwards;
-  color: white;
+  animation: w-100 2s linear 2s forwards,
+             cycle-color .65s linear infinite alternate-reverse;
+  transform: scale(1.15);
 }
 
 .controls button,
@@ -264,7 +268,7 @@ footer {
 
 .player-name-form > h2,
 .name-input {
-  animation: w-100 3s linear 2.5s forwards;
+  animation: w-100 2s linear 2s forwards;
 }
 
 @keyframes w-100 {

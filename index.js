@@ -4,6 +4,10 @@ const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
 const newGameBtn = document.querySelector('#new-game-btn');
 const cells = document.querySelectorAll('.cell');
+const playerNameForm = document.querySelector('.player-name-form');
+const nameInput = document.querySelector('#name-input');
+const nameInputContainer = document.querySelector('.name-input-container');
+const formBtn = document.querySelector('.form-btn');
 
 // Modules
 const setupController = (() => {
@@ -27,7 +31,7 @@ const uiController = (() => {
 
     displayText.append(displayTextSpan, "'s Turn");
   }
-  const displayResult = (result) => {
+  const showResult = (result) => {
     displayText.innerText = '';
     displayTextSpan.innerText = result;
     displayTextSpan.style.color = result === 'TIE' ? 'var(--tie-color)' : 'var(--won-color)';
@@ -52,23 +56,44 @@ const uiController = (() => {
       board.style.animation = null;
     }, 100);
   }
-  const fullUiReset = () => {
+  const resetGameUi = () => {
     resetDisplayText();
     resetCells();
     resetBoardAnimation();
   }
-  const hideNewGameBtn = () => {
-    newGameBtn.style.display = 'none';
-  }
   const showNewGameBtn = () => {
     newGameBtn.style.display = 'block';
   }
+  const hideNewGameBtn = () => {
+    newGameBtn.style.display = 'none';
+  }
+  const showForm = () => {
+    playerNameForm.style.display = 'flex';
+  }
+  const hideForm = () => {
+    playerNameForm.style.display = 'none';
+  }
+  const resetNameInput = () => {
+    nameInput.value = '';
+  }
+  const addNameInputContainerAnimation = () => {
+    nameInputContainer.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
+  }
+  const removeNameInputContainerAnimation = () => {
+    nameInputContainer.classList.remove('animate__animated', 'animate__flash', 'animate__repeat-1');
+  }
+
   return {
     updateDisplayTextSpan,
-    displayResult,
+    showResult,
     hideNewGameBtn,
     showNewGameBtn,
-    fullUiReset
+    resetGameUi,
+    showForm,
+    hideForm,
+    resetNameInput,
+    addNameInputContainerAnimation,
+    removeNameInputContainerAnimation
   }
 })();
 
@@ -78,10 +103,40 @@ const gameController = (() => {
   const getPlayerX = () => game.playerX;
   const getPlayerO = () => game.playerO;
   const assignPlayerX = () => {
-    game.playerX = prompt('Player X is: ');
+    if (!nameInput.value) {
+      uiController.addNameInputContainerAnimation();
+      setTimeout(uiController.removeNameInputContainerAnimation, 1250);
+      return;
+    } else {
+      game.playerX = nameInput.value;
+      uiController.resetNameInput();
+      uiController.removeNameInputContainerAnimation();
+    }
   }
   const assignPlayerO = () => {
-    game.playerO = prompt('Player O is: ');
+    if (!nameInput.value) {
+      uiController.addNameInputContainerAnimation();
+      setTimeout(uiController.removeNameInputContainerAnimation, 1250);
+      return;
+    } else {
+      game.playerO = nameInput.value;
+      uiController.resetNameInput();
+      uiController.removeNameInputContainerAnimation();
+    }
+  }
+  const assignPlayer = () => {
+    if (!game.playerX) {
+      assignPlayerX();
+    } else {
+      assignPlayerO();
+    }
+    
+    if (game.playerX && game.playerO) {
+      uiController.hideForm();
+      startGame();
+    }
+
+    console.log(game);
   }
   const makeNewGame = () => {
     game = {};
@@ -89,8 +144,6 @@ const gameController = (() => {
     game.isFinished = false;
     game.board = new Array(9).fill('');
     game.result = null;
-    assignPlayerX();
-    assignPlayerO();
   }
   const addEventListenerToCells = () => {
     cells.forEach(cell => {
@@ -105,20 +158,15 @@ const gameController = (() => {
     })
   }
   const startNewRound = () => {
-    uiController.fullUiReset();
+    makeNewGame();
     uiController.hideNewGameBtn();
-    setTimeout(() => {
-      makeNewGame();
-  
-      if (!game.playerX || !game.playerO) {
-        alert('Player missing. Please restart game!');
-        uiController.showNewGameBtn();
-        return;
-      }
-      
-      addEventListenerToCells();
-      uiController.updateDisplayTextSpan(game.turn);
-    }, 500);
+    uiController.resetGameUi();
+    uiController.resetNameInput();
+    uiController.showForm();
+  }
+  const startGame = () => {
+    addEventListenerToCells();
+    uiController.updateDisplayTextSpan(game.turn);
   }
   const handleCellClick = (e) => {
     const cell = e.target;
@@ -162,7 +210,7 @@ const gameController = (() => {
     if (winnerFound) {
       game.isFinished = true;
       game.result = game.turn === 'X' ? `${game.playerX}` : `${game.playerO}`;
-      uiController.displayResult(game.result);
+      uiController.showResult(game.result);
       removeEventListenerFromCells();
       return;
     }
@@ -170,7 +218,7 @@ const gameController = (() => {
     if (!winnerFound && boardIsFull()) {
       game.isFinished = true;
       game.result = 'TIE';
-      uiController.displayResult(game.result);
+      uiController.showResult(game.result);
       removeEventListenerFromCells();
       return;
     }
@@ -187,6 +235,9 @@ const gameController = (() => {
   return {
     getPlayerX,
     getPlayerO,
+    assignPlayer,
+    makeNewGame,
+    startGame,
     startNewRound
   }
 })();
@@ -203,3 +254,4 @@ setupController.setFooterYear();
 
 // Event listeners
 newGameBtn.addEventListener('pointerup', gameController.startNewRound);
+formBtn.addEventListener('pointerup', gameController.assignPlayer);
