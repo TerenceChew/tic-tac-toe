@@ -2,7 +2,8 @@
 const displayText = document.querySelector('.display-text');
 const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
-const newGameBtn = document.querySelector('#new-game-btn');
+const replayBtn = document.querySelector('.replay-btn');
+const newGameBtn = document.querySelector('.new-game-btn');
 const cells = document.querySelectorAll('.cell');
 const formContainer = document.querySelector('.form-container');
 const playerNameSpan = document.querySelector('.player-name-span');
@@ -29,21 +30,30 @@ const uiController = (() => {
     displayTextSpan.style.color = turn === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
 
     displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
-
     displayText.append(displayTextSpan, "'s Turn");
   }
   const showResult = (result) => {
     displayText.innerText = '';
-    displayTextSpan.innerText = result === 'X' ? gameController.getPlayerX() :
-                                result === 'O' ? gameController.getPlayerO() :
-                                'TIE';
-    displayTextSpan.style.color = result === 'X' ? 'var(--main-blue)' :
-                                  result === 'O' ? 'var(--main-purple)' :
-                                  'var(--tie-color)';
+    let innerText;
+    let color;
+
+    if (result === 'X') {
+      innerText = gameController.getPlayerX();
+      color = 'var(--main-blue)';
+    } else if (result === 'O') {
+      innerText = gameController.getPlayerO();
+      color = 'var(--main-purple)';
+    } else {
+      innerText = 'TIE';
+      color = 'var(--tie-color)';
+    }
+    
+    displayTextSpan.innerText = innerText;
+    displayTextSpan.style.color = color;
 
     displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
-    
     displayText.append(displayTextSpan, result === 'TIE' ? ' !' : ' WON !');
+    showReplayBtn();
     showNewGameBtn();
   }
   const resetDisplayText = () => {
@@ -65,6 +75,12 @@ const uiController = (() => {
     resetDisplayText();
     resetCells();
     resetBoardAnimation();
+  }
+  const showReplayBtn = () => {
+    replayBtn.style.display = 'block';
+  }
+  const hideReplayBtn = () => {
+    replayBtn.style.display = 'none';
   }
   const showNewGameBtn = () => {
     newGameBtn.style.display = 'block';
@@ -118,13 +134,11 @@ const uiController = (() => {
     showResult,
     resetBoardAnimation,
     resetGameUi,
-    showNewGameBtn,
+    hideReplayBtn,
     hideNewGameBtn,
-    updatePlayerNameSpan,
     showFormX,
     showFormO,
     hideForm,
-    updateNameInputColor,
     resetNameInput,
     addNameInputContainerAnimation,
     removeNameInputContainerAnimation
@@ -172,12 +186,21 @@ const gameController = (() => {
       startGame();
     }
   }
-  const makeNewGame = () => {
+  const replayGame = () => {
+    makeNewGame(getPlayerX(), getPlayerO());
+    uiController.hideReplayBtn();
+    uiController.hideNewGameBtn();
+    uiController.resetGameUi();
+    startGame();
+  }
+  const makeNewGame = (playerX = null, playerO = null) => {
     game = {};
     game.turn = 'X';
     game.isFinished = false;
     game.board = new Array(9).fill('');
     game.result = null;
+    game.playerX = playerX;
+    game.playerO = playerO;
   }
   const addEventListenerToCells = () => {
     cells.forEach(cell => {
@@ -193,6 +216,7 @@ const gameController = (() => {
   }
   const startNewRound = () => {
     makeNewGame();
+    uiController.hideReplayBtn();
     uiController.hideNewGameBtn();
     uiController.resetGameUi();
     uiController.resetNameInput();
@@ -270,6 +294,7 @@ const gameController = (() => {
     getPlayerX,
     getPlayerO,
     assignPlayer,
+    replayGame,
     makeNewGame,
     startGame,
     startNewRound
@@ -287,5 +312,6 @@ const gameController = (() => {
 setupController.setFooterYear();
 
 // Event listeners
+replayBtn.addEventListener('pointerup', gameController.replayGame);
 newGameBtn.addEventListener('pointerup', gameController.startNewRound);
 formBtn.addEventListener('pointerup', gameController.assignPlayer);

@@ -4,7 +4,6 @@
   --bg-1: rgb(0, 0, 30);
   --main-purple: rgb(255, 115, 255);
   --main-blue: rgb(86, 125, 255);
-  --won-color: rgb(70, 255, 70);
   --tie-color: rgb(255, 255, 67);
 }
 
@@ -40,12 +39,12 @@ body {
 }
 
 header {
-  padding: 50px 10px 10px;
+  padding: 50px 10px 15px;
 }
 
 h1 {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.85rem;
+  font-size: 1.75rem;
   word-spacing: -.55rem;
   color: white;
   text-shadow: 4px 2px var(--main-blue), -4px -2px var(--main-purple);
@@ -56,19 +55,19 @@ h1:hover {
 }
 
 .display {
-  height: 20vh;
+  height: 18vh;
 }
 
 .display-text {
   color: white;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-family: 'Silkscreen', cursive;
   text-align: center;
 }
 
 .display-text > span {
   color: var(--main-blue);
-  font-size: 1.55rem;
+  font-size: 1.5rem;
   font-family: 'Press Start 2P', cursive;
   vertical-align: sub;
 }
@@ -96,33 +95,45 @@ h1:hover {
   height: 85px;
   color: var(--main-blue);
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.75rem;
+  font-size: 1.55rem;
   cursor: not-allowed;
 }
 
 .controls {
-  height: 20vh;
-  margin-bottom: 25px;
+  width: min(485px, 85%);
+  height: 30vh;
+  margin: 0 auto;
+  gap: 6px;
 }
 
 .controls button {
-  max-width: 195px;
+  max-width: 64%;
   height: 60px;
   border: none;
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   background-color: transparent;
   word-spacing: -.5rem;
   cursor: pointer;
   color: white;
   transition: 1s;
-  animation: w-100 4s linear 1s forwards;
+  animation: w-100 1.5s linear 1s forwards;
+}
+
+.controls .replay-btn {
+  display: none;
+  border-bottom: 1px solid var(--main-purple);
+}
+
+.controls .new-game-btn {
+  border-top: 1px solid var(--main-blue);
 }
 
 .controls button:hover {
-  animation: w-100 4s linear 1s forwards,
+  animation: w-100 1.5s linear 1s forwards,
              cycle-color .65s linear infinite alternate-reverse;
-  transform: scale(1.15);
+  font-size: 1.25rem;
+  max-width: 100%;
 }
 
 @keyframes cycle-color {
@@ -150,15 +161,14 @@ footer {
 
 .fa-github {
   color: white;
-  transition: 1.25s;
+  transition: rotate 1.25s;
 }
 
-.fa-github:hover {
-  transform: rotate(720deg);
+footer a:hover .fa-github {
+  rotate: 720deg;
 }
 
 /* Name form */
-
 .form-container {
   display: none;
   height: min(365px, 85vh);
@@ -247,7 +257,7 @@ footer {
   background-color: transparent;
   text-align: center;
   font-family: 'Press Start 2P', cursive;
-  font-size: .9rem;
+  font-size: 1.1rem;
   color: var(--main-purple);
 }
 
@@ -257,7 +267,7 @@ footer {
 }
 
 .form-btn {
-  max-width: 64%;
+  max-width: 65%;
   height: 50px;
   border: none;
   background-color: transparent;
@@ -274,7 +284,7 @@ footer {
 .form-btn:hover {
   animation: w-100 1.25s linear 1.5s forwards,
              cycle-color .65s linear infinite alternate-reverse;
-  transform: scale(1.15);
+  font-size: 1.25rem;
 }
 
 .controls button,
