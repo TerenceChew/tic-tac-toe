@@ -4,9 +4,10 @@ const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
 const newGameBtn = document.querySelector('#new-game-btn');
 const cells = document.querySelectorAll('.cell');
-const playerNameForm = document.querySelector('.player-name-form');
-const nameInput = document.querySelector('#name-input');
+const formContainer = document.querySelector('.form-container');
+const playerNameSpan = document.querySelector('.player-name-span');
 const nameInputContainer = document.querySelector('.name-input-container');
+const nameInput = document.querySelector('#name-input');
 const formBtn = document.querySelector('.form-btn');
 
 // Modules
@@ -33,12 +34,16 @@ const uiController = (() => {
   }
   const showResult = (result) => {
     displayText.innerText = '';
-    displayTextSpan.innerText = result;
-    displayTextSpan.style.color = result === 'TIE' ? 'var(--tie-color)' : 'var(--won-color)';
+    displayTextSpan.innerText = result === 'X' ? gameController.getPlayerX() :
+                                result === 'O' ? gameController.getPlayerO() :
+                                'TIE';
+    displayTextSpan.style.color = result === 'X' ? 'var(--main-blue)' :
+                                  result === 'O' ? 'var(--main-purple)' :
+                                  'var(--tie-color)';
 
     displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
     
-    displayText.append(displayTextSpan, result === 'TIE' ? '!' : ' WON!');
+    displayText.append(displayTextSpan, result === 'TIE' ? ' !' : ' WON !');
     showNewGameBtn();
   }
   const resetDisplayText = () => {
@@ -67,11 +72,36 @@ const uiController = (() => {
   const hideNewGameBtn = () => {
     newGameBtn.style.display = 'none';
   }
-  const showForm = () => {
-    playerNameForm.style.display = 'flex';
+  const updatePlayerNameSpan = (player) => {
+    playerNameSpan.innerText = '';
+    playerNameSpan.innerText = player === 'X' ? 'X' : 'O';
+    playerNameSpan.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
+  }
+  const blurBoard = () => {
+    board.style.filter = 'blur(4px)';
+  }
+  const unblurBoard = () => {
+    board.style.filter = 'none';
+  }
+  const updateForm = (player) => {
+    updatePlayerNameSpan(player);
+    updateNameInputColor(player);
+    blurBoard();
+  }
+  const showFormX = () => {
+    formContainer.style.display = 'flex';
+    updateForm('X');
+  }
+  const showFormO = () => {
+    formContainer.style.display = 'flex';
+    updateForm('O');
   }
   const hideForm = () => {
-    playerNameForm.style.display = 'none';
+    formContainer.style.display = 'none';
+    unblurBoard();
+  }
+  const updateNameInputColor = (player) => {
+    nameInput.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
   }
   const resetNameInput = () => {
     nameInput.value = '';
@@ -86,11 +116,15 @@ const uiController = (() => {
   return {
     updateDisplayTextSpan,
     showResult,
-    hideNewGameBtn,
-    showNewGameBtn,
+    resetBoardAnimation,
     resetGameUi,
-    showForm,
+    showNewGameBtn,
+    hideNewGameBtn,
+    updatePlayerNameSpan,
+    showFormX,
+    showFormO,
     hideForm,
+    updateNameInputColor,
     resetNameInput,
     addNameInputContainerAnimation,
     removeNameInputContainerAnimation
@@ -111,6 +145,7 @@ const gameController = (() => {
       game.playerX = nameInput.value;
       uiController.resetNameInput();
       uiController.removeNameInputContainerAnimation();
+      uiController.showFormO();
     }
   }
   const assignPlayerO = () => {
@@ -133,10 +168,9 @@ const gameController = (() => {
     
     if (game.playerX && game.playerO) {
       uiController.hideForm();
+      uiController.resetBoardAnimation();
       startGame();
     }
-
-    console.log(game);
   }
   const makeNewGame = () => {
     game = {};
@@ -162,7 +196,7 @@ const gameController = (() => {
     uiController.hideNewGameBtn();
     uiController.resetGameUi();
     uiController.resetNameInput();
-    uiController.showForm();
+    uiController.showFormX();
   }
   const startGame = () => {
     addEventListenerToCells();
@@ -209,7 +243,7 @@ const gameController = (() => {
 
     if (winnerFound) {
       game.isFinished = true;
-      game.result = game.turn === 'X' ? `${game.playerX}` : `${game.playerO}`;
+      game.result = game.turn;
       uiController.showResult(game.result);
       removeEventListenerFromCells();
       return;
