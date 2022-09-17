@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=JetBrains+Mono&family=Press+Start+2P&family=Silkscreen&family=PT+Mono&display=swap');
 
 :root {
-  --bg-1: rgb(0, 0, 30);
+  --bg-1: rgb(0, 0, 25);
   --main-purple: rgb(255, 115, 255);
   --main-blue: rgb(86, 125, 255);
   --tie-color: rgb(255, 255, 67);
@@ -39,7 +39,7 @@ body {
 }
 
 header {
-  padding: 50px 10px 15px;
+  padding: 50px 15px 15px;
 }
 
 h1 {
@@ -55,10 +55,12 @@ h1:hover {
 }
 
 .display {
-  height: 18vh;
+  height: 17vh;
+  margin-bottom: 15px;
 }
 
 .display-text {
+  padding: 0 15px;
   color: white;
   font-size: 1.05rem;
   font-family: 'Silkscreen', cursive;
@@ -100,14 +102,15 @@ h1:hover {
 }
 
 .controls {
-  width: min(485px, 85%);
-  height: 30vh;
+  width: min(325px, 70%);
+  height: 27vh;
   margin: 0 auto;
-  gap: 6px;
+  gap: 5px;
 }
 
-.controls button {
-  max-width: 64%;
+.controls button,
+.choose-player-box button {
+  max-width: 75%;
   height: 60px;
   border: none;
   font-family: 'Press Start 2P', cursive;
@@ -120,29 +123,24 @@ h1:hover {
   animation: w-100 1.5s linear 1s forwards;
 }
 
-.controls .replay-btn {
+.controls .replay-btn,
+.choose-player-box .player-btn {
   display: none;
-  border-bottom: 1px solid var(--main-purple);
+  border-bottom: 2px solid var(--main-purple);
+  padding-top: 5px;
 }
 
-.controls .new-game-btn {
-  border-top: 1px solid var(--main-blue);
+.controls .new-game-btn,
+.choose-player-box .ai-btn {
+  border-top: 2px solid var(--main-blue);
 }
 
-.controls button:hover {
-  animation: w-100 1.5s linear 1s forwards,
+.controls button:hover,
+.choose-player-box button:hover {
+  animation: w-100 1s linear 1s forwards,
              cycle-color .65s linear infinite alternate-reverse;
   font-size: 1.25rem;
   max-width: 100%;
-}
-
-@keyframes cycle-color {
-  from {
-    color: var(--main-blue);
-  }
-  to {
-    color: var(--main-purple);
-  }
 }
 
 footer {
@@ -168,11 +166,11 @@ footer a:hover .fa-github {
   rotate: 720deg;
 }
 
-/* Name form */
+/* Form */
 .form-container {
   display: none;
-  height: min(365px, 85vh);
-  width: 265px;
+  height: min(425px, 85vh);
+  width: 285px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -181,15 +179,11 @@ footer a:hover .fa-github {
   overflow-y: scroll;
 }
 
-.player-name-form {
-  display: flex;
-  height: 350px;
+.form {
+  height: 355px;
   width: 100%;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  gap: 18px;
-  background-color: var(--bg-1);
+  gap: 100px;
+  background-color: transparent;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -203,49 +197,20 @@ footer a:hover .fa-github {
   scrollbar-width: none;  /* Firefox */
 }
 
-@keyframes show-border {
-  0% {
-    border: 6px double transparent;
-  }
-  5% {
-    border-width: 6px;
-    border-style: double;
-    border-color: transparent transparent transparent var(--main-blue);
-  }
-  25% {
-    border-width: 6px;
-    border-style: double;
-    border-color: transparent transparent var(--main-blue) transparent;
-  }
-  45% {
-    border-width: 6px;
-    border-style: double;
-    border-color: transparent var(--main-purple) transparent transparent;
-  }
-  65% {
-    border-width: 6px;
-    border-style: double;
-    border-color: var(--main-purple) transparent transparent transparent;
-  }
-  85% {
-    border: 6px double transparent;
-  }
-  100% {
-    border-width: 6px;
-    border-style: double;
-    border-color: var(--main-purple) var(--main-purple) var(--main-blue) var(--main-blue);
-  }
-}
-
-.player-name-form > h2 {
+.form > h2 {
   font-family: 'Silkscreen', cursive;
   font-size: 1.15rem;
   color: white;
 }
 
 .player-name-span {
-  font-size: 3.4rem;
+  font-size: 3.45rem;
   color: var(--main-purple);
+}
+
+/* Input box */
+.input-box {
+  gap: 65px;
 }
 
 .name-input {
@@ -257,18 +222,18 @@ footer a:hover .fa-github {
   background-color: transparent;
   text-align: center;
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--main-purple);
 }
 
 .name-input::placeholder {
-  font-size: .7rem;
+  font-size: .8rem;
   color: rgba(205, 205, 205, 0.85);
 }
 
-.form-btn {
+.enter-btn {
   max-width: 65%;
-  height: 50px;
+  height: 60px;
   border: none;
   background-color: transparent;
   font-size: 1.05rem;
@@ -281,29 +246,83 @@ footer a:hover .fa-github {
   animation: w-100 1.25s linear 1.5s forwards;
 }
 
-.form-btn:hover {
+.enter-btn:hover {
   animation: w-100 1.25s linear 1.5s forwards,
              cycle-color .65s linear infinite alternate-reverse;
   font-size: 1.25rem;
 }
 
 .controls button,
-.player-name-form > h2,
+.form > h2,
 .name-input,
-.form-btn {
+.enter-btn,
+.choose-player-box button {
   width: 0%;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.player-name-form > h2,
+.form > h2,
 .name-input {
   animation: w-100 1.25s linear 1.5s forwards;
+}
+
+/* Choose player box */
+.choose-player-box {
+  width: 75%;
+  gap: 5px;
+}
+
+.choose-player-box .player-btn {
+  display: block;
+}
+
+@keyframes cycle-color {
+  from {
+    color: var(--main-blue);
+  }
+  to {
+    color: var(--main-purple);
+  }
 }
 
 @keyframes w-100 {
   to {
     width: 100%;
+  }
+}
+
+@keyframes show-border {
+  0% {
+    border: 14px double transparent;
+  }
+  5% {
+    border-width: 14px;
+    border-style: double;
+    border-color: transparent transparent transparent var(--main-blue);
+  }
+  25% {
+    border-width: 14px;
+    border-style: double;
+    border-color: transparent transparent var(--main-blue) transparent;
+  }
+  45% {
+    border-width: 14px;
+    border-style: double;
+    border-color: transparent var(--main-purple) transparent transparent;
+  }
+  65% {
+    border-width: 14px;
+    border-style: double;
+    border-color: var(--main-purple) transparent transparent transparent;
+  }
+  85% {
+    border: 14px double transparent;
+  }
+  100% {
+    border-width: 14px;
+    border-style: double;
+    border-color: var(--main-purple) var(--main-purple) var(--main-blue) var(--main-blue);
   }
 }

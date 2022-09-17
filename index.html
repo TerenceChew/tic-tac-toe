@@ -53,18 +53,25 @@
   </footer>
 
   <div class="form-container">
-    <form class="player-name-form">
+    <form class="form flex-column-center">
       <h2>
         PLAYER
         <span class="player-name-span">X</span>
         IS
       </h2>
   
-      <div class="name-input-container center">
-        <input class="name-input" id="name-input" name="name-input" type="text" placeholder="Enter Your Name" maxlength="10" autocomplete="off">
+      <div class="input-box flex-column-center">
+        <div class="name-input-container center">
+          <input class="name-input" id="name-input" name="name-input" type="text" placeholder="Enter Your Name" maxlength="11" autocomplete="off">
+        </div>
+        
+        <button type="button" class="enter-btn">ENTER</button>
       </div>
-      
-      <button type="button" class="form-btn">ENTER</button>
+
+      <div class="choose-player-box flex-column-center">
+        <button class="player-btn">PLAYER</button>
+        <button class="ai-btn">AI</button>
+      </div>
     </form>
   </div>
 </body>

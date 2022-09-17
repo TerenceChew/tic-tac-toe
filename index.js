@@ -1,22 +1,28 @@
-// Selectors
+// Game UI selectors
 const displayText = document.querySelector('.display-text');
 const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
 const replayBtn = document.querySelector('.replay-btn');
 const newGameBtn = document.querySelector('.new-game-btn');
 const cells = document.querySelectorAll('.cell');
+
+// Form selectors
 const formContainer = document.querySelector('.form-container');
 const playerNameSpan = document.querySelector('.player-name-span');
+const inputBox = document.querySelector('.input-box');
+const choosePlayerBox = document.querySelector('.choose-player-box');
 const nameInputContainer = document.querySelector('.name-input-container');
-const nameInput = document.querySelector('#name-input');
-const formBtn = document.querySelector('.form-btn');
+const nameInput = document.querySelector('.name-input');
+const enterBtn = document.querySelector('.enter-btn');
+const playerBtn = document.querySelector('.player-btn');
+const aiBtn = document.querySelector('.ai-btn');
 
 // Modules
 const setupController = (() => {
   const setFooterYear = () => {
     const currYearSpan = document.querySelector('.curr-year');
     const currYear = new Date().getFullYear();
-    currYearSpan.innerText = currYear
+    currYearSpan.innerText = currYear;
   }
   return {
     setFooterYear
@@ -93,16 +99,16 @@ const uiController = (() => {
     playerNameSpan.innerText = player === 'X' ? 'X' : 'O';
     playerNameSpan.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
   }
-  const blurBoard = () => {
-    board.style.filter = 'blur(4px)';
+  const hideBoard = () => {
+    board.style.display = 'none';
   }
-  const unblurBoard = () => {
-    board.style.filter = 'none';
+  const showBoard = () => {
+    board.style.display = 'grid';
   }
   const updateForm = (player) => {
     updatePlayerNameSpan(player);
     updateNameInputColor(player);
-    blurBoard();
+    hideBoard();
   }
   const showFormX = () => {
     formContainer.style.display = 'flex';
@@ -114,7 +120,7 @@ const uiController = (() => {
   }
   const hideForm = () => {
     formContainer.style.display = 'none';
-    unblurBoard();
+    showBoard();
   }
   const updateNameInputColor = (player) => {
     nameInput.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
@@ -314,4 +320,4 @@ setupController.setFooterYear();
 // Event listeners
 replayBtn.addEventListener('pointerup', gameController.replayGame);
 newGameBtn.addEventListener('pointerup', gameController.startNewRound);
-formBtn.addEventListener('pointerup', gameController.assignPlayer);
+enterBtn.addEventListener('pointerup', gameController.assignPlayer);
