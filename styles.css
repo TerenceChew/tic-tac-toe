@@ -108,8 +108,7 @@ h1:hover {
   gap: 5px;
 }
 
-.controls button,
-.choose-player-box button {
+.controls button {
   max-width: 75%;
   height: 60px;
   border: none;
@@ -123,20 +122,17 @@ h1:hover {
   animation: w-100 1.5s linear 1s forwards;
 }
 
-.controls .replay-btn,
-.choose-player-box .player-btn {
+.controls .replay-btn {
   display: none;
   border-bottom: 2px solid var(--main-purple);
   padding-top: 5px;
 }
 
-.controls .new-game-btn,
-.choose-player-box .ai-btn {
+.controls .new-game-btn {
   border-top: 2px solid var(--main-blue);
 }
 
-.controls button:hover,
-.choose-player-box button:hover {
+.controls button:hover {
   animation: w-100 1s linear 1s forwards,
              cycle-color .65s linear infinite alternate-reverse;
   font-size: 1.25rem;
@@ -175,14 +171,19 @@ footer a:hover .fa-github {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: show-border 1.5s linear forwards;
+  animation: show-border 1.35s linear forwards;
   overflow-y: scroll;
 }
 
 .form {
   height: 355px;
   width: 100%;
+  display: flex;
   gap: 100px;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  padding-top: 20px;
   background-color: transparent;
 }
 
@@ -243,11 +244,11 @@ footer a:hover .fa-github {
   cursor: pointer;
   color: white;
   transition: 1s;
-  animation: w-100 1.25s linear 1.5s forwards;
+  animation: w-100 1.25s linear 1.15s forwards;
 }
 
 .enter-btn:hover {
-  animation: w-100 1.25s linear 1.5s forwards,
+  animation: w-100 1.25s linear 1.15s forwards,
              cycle-color .65s linear infinite alternate-reverse;
   font-size: 1.25rem;
 }
@@ -265,17 +266,44 @@ footer a:hover .fa-github {
 
 .form > h2,
 .name-input {
-  animation: w-100 1.25s linear 1.5s forwards;
+  animation: w-100 1.25s linear 1.15s forwards;
 }
 
 /* Choose player box */
 .choose-player-box {
+  display: none;
   width: 75%;
   gap: 5px;
 }
 
+.choose-player-box button {
+  max-width: 75%;
+  height: 60px;
+  border: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.05rem;
+  background-color: transparent;
+  word-spacing: -.5rem;
+  cursor: pointer;
+  color: white;
+  transition: 1s;
+  animation: w-100 1.25s linear 1.15s forwards;
+}
+
 .choose-player-box .player-btn {
-  display: block;
+  border-bottom: 2px solid var(--main-purple);
+  padding-top: 5px;
+}
+
+.choose-player-box .ai-btn {
+  border-top: 2px solid var(--main-blue);
+}
+
+.choose-player-box button:hover {
+  animation: w-100 1.25s linear 1.15s forwards,
+             cycle-color .65s linear infinite alternate-reverse;
+  font-size: 1.25rem;
+  max-width: 100%;
 }
 
 @keyframes cycle-color {
