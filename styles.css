@@ -30,12 +30,14 @@
 }
 
 body {
+  background-color: var(--bg-1);
+}
+
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   font-family: 'JetBrains Mono', monospace;
-  background-color: var(--bg-1);
-  position: relative;
 }
 
 header {
@@ -114,7 +116,7 @@ h1:hover {
   border: none;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.05rem;
-  background-color: transparent;
+  background-color: var(--bg-1);
   word-spacing: -.5rem;
   cursor: pointer;
   color: white;
@@ -167,12 +169,13 @@ footer a:hover .fa-github {
   display: none;
   height: min(425px, 85vh);
   width: 285px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   animation: show-border 1.35s linear forwards;
   overflow-y: scroll;
+  background-color: var(--bg-1);
 }
 
 .form {
@@ -184,7 +187,6 @@ footer a:hover .fa-github {
   justify-content: start;
   align-items: center;
   padding-top: 20px;
-  background-color: transparent;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -220,11 +222,10 @@ footer a:hover .fa-github {
   height: calc(1rem + 14px);
   border: none;
   outline: none;
-  background-color: transparent;
+  background-color: var(--bg-1);
   text-align: center;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.15rem;
-  color: var(--main-purple);
 }
 
 .name-input::placeholder {
@@ -236,7 +237,7 @@ footer a:hover .fa-github {
   max-width: 65%;
   height: 60px;
   border: none;
-  background-color: transparent;
+  background-color: var(--bg-1);
   font-size: 1.05rem;
   font-family: 'Press Start 2P', cursive;
   text-align: center;
@@ -282,7 +283,7 @@ footer a:hover .fa-github {
   border: none;
   font-family: 'Press Start 2P', cursive;
   font-size: 1.05rem;
-  background-color: transparent;
+  background-color: var(--bg-1);
   word-spacing: -.5rem;
   cursor: pointer;
   color: white;

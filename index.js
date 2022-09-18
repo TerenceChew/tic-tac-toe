@@ -1,4 +1,5 @@
 // Game UI selectors
+const container = document.querySelector('.container');
 const displayText = document.querySelector('.display-text');
 const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
@@ -65,13 +66,13 @@ const uiController = (() => {
     _showNewGameBtn();
   }
   // Board
-  const showBoard = () => {
+  const _showBoard = () => {
     board.style.display = 'grid';
   }
   const _hideBoard = () => {
     board.style.display = 'none';
   }
-  const resetBoardAnimation = () => {
+  const _resetBoardAnimation = () => {
     board.style.animation = 'none';
 
     setTimeout(() => {
@@ -103,20 +104,29 @@ const uiController = (() => {
   // Reset
   const resetGameUi = () => {
     _resetDisplayText();
-    resetBoardAnimation();
+    _resetBoardAnimation();
     _resetCells();
   }
 
   // Form functions //
   // General
+  const _blurBg = () => {
+    container.style.filter = 'blur(5px)';
+    container.style.pointerEvents = 'none';
+  }
+  const _unblurBg = () => {
+    container.style.filter = 'none';
+    container.style.pointerEvents = 'auto';
+  }
   const _updateForm = (player) => {
     _updatePlayerNameSpan(player);
     _updateNameInputColor(player);
-    _hideBoard();
   }
   const showFormX = () => {
     formContainer.style.display = 'flex';
     _updateForm('X');
+    _hideBoard();
+    _blurBg();
   }
   const showFormO = () => {
     formContainer.style.display = 'flex';
@@ -125,6 +135,9 @@ const uiController = (() => {
   }
   const hideForm = () => {
     formContainer.style.display = 'none';
+    _unblurBg();
+    _showBoard();
+    _resetBoardAnimation();
   }
   // Form title
   const _resetFormTitleAnimation = () => {
@@ -169,9 +182,7 @@ const uiController = (() => {
   return {
     updateDisplayTextSpan,
     showResult,
-    resetBoardAnimation,
     resetGameUi,
-    showBoard,
     markCell,
     hideReplayBtn,
     hideNewGameBtn,
@@ -247,8 +258,6 @@ const gameController = (() => {
 
     if (!game.playerX || !game.playerO) return;
     
-    uiController.showBoard();
-    uiController.resetBoardAnimation();
     _startGame();
   }
   const determinePlayerO = (e) => {
