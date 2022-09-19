@@ -1,4 +1,4 @@
-#Tic Tac Toe
+# Tic Tac Toe
 
 Built with HTML, CSS and JS.
 
