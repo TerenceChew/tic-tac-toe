@@ -1,54 +1,50 @@
-// Game UI selectors
-const container = document.querySelector('.container');
-const displayText = document.querySelector('.display-text');
-const displayTextSpan = document.querySelector('.display-text > span');
-const board = document.querySelector('.board');
-const replayBtn = document.querySelector('.replay-btn');
-const newGameBtn = document.querySelector('.new-game-btn');
-const btnDivider1 = document.querySelector('.btn-divider-1');
-const cells = document.querySelectorAll('.cell');
-
-// Form selectors
-const formContainer = document.querySelector('.form-container');
-const formTitle = document.querySelector('.form-title');
-const playerNameSpan = document.querySelector('.player-name-span');
-const inputBox = document.querySelector('.input-box');
-const choosePlayerBox = document.querySelector('.choose-player-box');
-const nameInputContainer = document.querySelector('.name-input-container');
-const nameInput = document.querySelector('.name-input');
-const enterBtn = document.querySelector('.enter-btn');
-const playerBtn = document.querySelector('.player-btn');
-const aiBtn = document.querySelector('.ai-btn');
-
 // Modules
 const setupController = (() => {
-  const setFooterYear = () => {
+  const _setFooterYear = () => {
     const currYearSpan = document.querySelector('.curr-year');
     const currYear = new Date().getFullYear();
     currYearSpan.innerText = currYear;
   }
-  return {
-    setFooterYear
-  }
+
+  _setFooterYear();
 })();
 
 const uiController = (() => {
+  // Game UI selectors
+  const _container = document.querySelector('._container');
+  const _displayText = document.querySelector('.display-text');
+  const _displayTextSpan = document.querySelector('.display-text > span');
+  const _board = document.querySelector('.board');
+  const _replayBtn = document.querySelector('.replay-btn');
+  const _newGameBtn = document.querySelector('.new-game-btn');
+  const _btnDivider1 = document.querySelector('.btn-divider-1');
+  const _cells = document.querySelectorAll('.cell');
+
+  // Form selectors
+  const _formContainer = document.querySelector('.form-_container');
+  const _formTitle = document.querySelector('.form-title');
+  const _playerNameSpan = document.querySelector('.player-name-span');
+  const _inputBox = document.querySelector('.input-box');
+  const _choosePlayerBox = document.querySelector('.choose-player-box');
+  const _nameInputContainer = document.querySelector('.name-input-_container');
+  const _nameInput = document.querySelector('.name-input');
+
   // Game UI functions //
   // Display text
   const _resetDisplayText = () => {
-    displayText.innerText = '';
+    _displayText.innerText = '';
   }
   const updateDisplayTextSpan = (turn) => {
-    displayText.innerText = '';
-    displayTextSpan.innerText = turn === 'X' ? gameController.getPlayerX() : gameController.getPlayerO();
-    displayTextSpan.style.color = turn === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
+    _displayText.innerText = '';
+    _displayTextSpan.innerText = turn === 'X' ? gameController.getPlayerX() : gameController.getPlayerO();
+    _displayTextSpan.style.color = turn === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
 
-    displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
-    displayText.append(displayTextSpan, "'s Turn");
+    _displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
+    _displayText.append(_displayTextSpan, "'s Turn");
   }
   const showResult = (result, turn) => {
-    displayText.innerText = '';
-    displayTextSpan.innerText = result;
+    _displayText.innerText = '';
+    _displayTextSpan.innerText = result;
     let color;
 
     if (turn === 'X') {
@@ -59,26 +55,26 @@ const uiController = (() => {
       color = 'var(--tie-color)';
     }
     
-    displayTextSpan.style.color = color;
+    _displayTextSpan.style.color = color;
 
-    displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
-    displayText.append(displayTextSpan, result === 'TIE' ? ' !' : ' WON !');
+    _displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
+    _displayText.append(_displayTextSpan, result === 'TIE' ? ' !' : ' WON !');
     _showReplayBtn();
     _showNewGameBtn();
     _showBtnDivider();
   }
   // Board
   const _showBoard = () => {
-    board.style.display = 'grid';
+    _board.style.display = 'grid';
   }
   const _hideBoard = () => {
-    board.style.display = 'none';
+    _board.style.display = 'none';
   }
   const _resetBoardAnimation = () => {
-    board.style.animation = 'none';
+    _board.style.animation = 'none';
 
     setTimeout(() => {
-      board.style.animation = null;
+      _board.style.animation = null;
     }, 100);
   }
   const markCell = (cell, turn) => {
@@ -86,28 +82,28 @@ const uiController = (() => {
     cell.style.color = turn === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   const _resetCells = () => {
-    cells.forEach(cell => {
+    _cells.forEach(cell => {
       cell.innerText = '';
     })
   }
   // Buttons
   const _showReplayBtn = () => {
-    replayBtn.style.display = 'block';
+    _replayBtn.style.display = 'block';
   }
   const hideReplayBtn = () => {
-    replayBtn.style.display = 'none';
+    _replayBtn.style.display = 'none';
   }
   const _showNewGameBtn = () => {
-    newGameBtn.style.display = 'block';
+    _newGameBtn.style.display = 'block';
   }
   const hideNewGameBtn = () => {
-    newGameBtn.style.display = 'none';
+    _newGameBtn.style.display = 'none';
   }
   const _showBtnDivider = () => {
-    btnDivider1.style.display = 'block';
+    _btnDivider1.style.display = 'block';
   }
   const hideBtnDivider = () => {
-    btnDivider1.style.display = 'none';
+    _btnDivider1.style.display = 'none';
   }
   // Reset
   const resetGameUi = () => {
@@ -119,72 +115,72 @@ const uiController = (() => {
   // Form functions //
   // General
   const _blurBg = () => {
-    container.style.filter = 'blur(5px)';
-    container.style.pointerEvents = 'none';
+    _container.style.filter = 'blur(5px)';
+    _container.style.pointerEvents = 'none';
   }
   const _unblurBg = () => {
-    container.style.filter = 'none';
-    container.style.pointerEvents = 'auto';
+    _container.style.filter = 'none';
+    _container.style.pointerEvents = 'auto';
   }
   const _updateForm = (player) => {
     _updatePlayerNameSpan(player);
     _updateNameInputColor(player);
   }
   const showFormX = () => {
-    formContainer.style.display = 'flex';
+    _formContainer.style.display = 'flex';
     _updateForm('X');
     _hideBoard();
     _blurBg();
   }
   const showFormO = () => {
-    formContainer.style.display = 'flex';
+    _formContainer.style.display = 'flex';
     _updateForm('O');
     _resetFormTitleAnimation();
   }
   const hideForm = () => {
-    formContainer.style.display = 'none';
+    _formContainer.style.display = 'none';
     _unblurBg();
     _showBoard();
     _resetBoardAnimation();
   }
   // Form title
   const _resetFormTitleAnimation = () => {
-    formTitle.style.animation = 'none';
+    _formTitle.style.animation = 'none';
 
     setTimeout(() => {
-      formTitle.style.animation = null;
+      _formTitle.style.animation = null;
     }, 100);
   }
   const _updatePlayerNameSpan = (player) => {
-    playerNameSpan.innerText = '';
-    playerNameSpan.innerText = player === 'X' ? 'X' : 'O';
-    playerNameSpan.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
+    _playerNameSpan.innerText = '';
+    _playerNameSpan.innerText = player === 'X' ? 'X' : 'O';
+    _playerNameSpan.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   // Input box
   const showInputBox = () => {
-    inputBox.style.display = 'flex';
+    _inputBox.style.display = 'flex';
   }
   const hideInputBox = () => {
-    inputBox.style.display = 'none';
+    _inputBox.style.display = 'none';
   }
   const resetNameInputContainerAnimation = () => {
-    nameInputContainer.style.animation = 'none';
+    _nameInputContainer.style.animation = 'none';
     setTimeout(() => {
-      nameInputContainer.style.animation = null;
+      _nameInputContainer.style.animation = null;
     }, 100);
   }
   const _updateNameInputColor = (player) => {
-    nameInput.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
+    _nameInput.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   const resetNameInputValue = () => {
-    nameInput.value = '';
+    _nameInput.value = '';
   }
   // Choose player box
   const showChoosePlayerBox = () => {
-    choosePlayerBox.style.display = 'flex';
+    _choosePlayerBox.style.display = 'flex';
   }
   const hideChoosePlayerBox = () => {
-    choosePlayerBox.style.display = 'none';
+    _choosePlayerBox.style.display = 'none';
   }
 
   return {
@@ -208,32 +204,44 @@ const uiController = (() => {
 })();
 
 const gameController = (() => {
-  let game;
+  // Game UI selectors
+  const _replayBtn = document.querySelector('.replay-btn');
+  const _newGameBtn = document.querySelector('.new-game-btn');
+  const _cells = document.querySelectorAll('.cell');
+
+  // Form selectors
+  const _nameInput = document.querySelector('.name-input');
+  const _enterBtn = document.querySelector('.enter-btn');
+  const _playerBtn = document.querySelector('.player-btn');
+  const _aiBtn = document.querySelector('.ai-btn');
+
+  // Variables
+  let _game;
 
   // General
-  const _getMode = () => game.mode;
-  const getPlayerX = () => game.playerX;
-  const getPlayerO = () => game.playerO;
+  const _getMode = () => _game.mode;
+  const getPlayerX = () => _game.playerX;
+  const getPlayerO = () => _game.playerO;
   const _addEventListenerToCells = () => {
-    cells.forEach(cell => {
+    _cells.forEach(cell => {
       cell.style.cursor = 'pointer';
       cell.addEventListener('pointerup', _handleCellClick);
     })
   }
   const _removeEventListenerFromCells = () => {
-    cells.forEach(cell => {
+    _cells.forEach(cell => {
       cell.style.cursor = 'not-allowed';
       cell.removeEventListener('pointerup', _handleCellClick);
     })
   }
   // Player assignment
   const _assignPlayerX = () => {
-    if (!nameInput.value || !nameInput.value.trim()) {
+    if (!_nameInput.value || !_nameInput.value.trim()) {
       uiController.resetNameInputValue();
       uiController.resetNameInputContainerAnimation();
       return;
     } else {
-      game.playerX = nameInput.value;
+      _game.playerX = _nameInput.value;
       uiController.resetNameInputValue();
       uiController.showFormO();
       uiController.hideInputBox();
@@ -241,31 +249,31 @@ const gameController = (() => {
     }
   }
   const _assignPlayerO = () => {
-    if (game.mode === 'AI') {
-      game.playerO = game.ai.getName();
+    if (_game.mode === 'AI') {
+      _game.playerO = _game.ai.getName();
       uiController.resetNameInputValue();
       uiController.hideForm();
       return;
     }
 
-    if (!nameInput.value || !nameInput.value.trim()) {
+    if (!_nameInput.value || !_nameInput.value.trim()) {
       uiController.resetNameInputValue();
       uiController.resetNameInputContainerAnimation();
       return;
     } else {
-      game.playerO = nameInput.value;
+      _game.playerO = _nameInput.value;
       uiController.resetNameInputValue();
       uiController.hideForm();
     }
   }
   const assignPlayer = () => {
-    if (!game.playerX) {
+    if (!_game.playerX) {
       _assignPlayerX();
     } else {
       _assignPlayerO();
     }
 
-    if (!game.playerX || !game.playerO) return;
+    if (!_game.playerX || !_game.playerO) return;
     
     _startGame();
   }
@@ -273,29 +281,29 @@ const gameController = (() => {
     let btnText = e.target.innerText;
 
     if (btnText === 'PLAYER') {
-      game.mode = 'PLAYER';
+      _game.mode = 'PLAYER';
       uiController.hideChoosePlayerBox();
       uiController.showInputBox();
     } else {
       uiController.hideChoosePlayerBox();
-      game.mode = 'AI';
-      game.ai = createAi();
+      _game.mode = 'AI';
+      _game.ai = createAi();
       assignPlayer();
     }
   }
   // Game start
   const _makeNewGame = (playerX = null, playerO = null, mode = null) => {
-    game = {};
-    game.turn = 'X';
-    game.isFinished = false;
-    game.board = new Array(9).fill('');
-    game.result = null;
-    game.playerX = playerX;
-    game.playerO = playerO;
+    _game = {};
+    _game.turn = 'X';
+    _game.isFinished = false;
+    _game.board = new Array(9).fill('');
+    _game.result = null;
+    _game.playerX = playerX;
+    _game.playerO = playerO;
     
     if (mode === 'AI') {
-      game.ai = createAi();
-      game.mode = mode;
+      _game.ai = createAi();
+      _game.mode = mode;
     }
   }
   const startNewRound = () => {
@@ -310,18 +318,18 @@ const gameController = (() => {
   }
   const _startGame = () => {
     _addEventListenerToCells();
-    uiController.updateDisplayTextSpan(game.turn);
+    uiController.updateDisplayTextSpan(_game.turn);
   }
   // Game logic 
   const _handleCellClick = (e) => {
     const cell = e.target;
     const cellIndex = cell.dataset.index;
 
-    if (cell.innerText !== '' || game.isFinished) return;
+    if (cell.innerText !== '' || _game.isFinished) return;
 
-    uiController.markCell(cell, game.turn);
-    _updateBoard(game, cellIndex, game.turn);
-    checkWin(game);
+    uiController.markCell(cell, _game.turn);
+    _updateBoard(_game, cellIndex, _game.turn);
+    checkWin(_game);
   }
   const _updateBoard = (game, cellIndex, turn) => {
     game.board[Number(cellIndex)] = turn;
@@ -394,13 +402,16 @@ const gameController = (() => {
     _startGame();
   }
 
+  // Event listeners
+  _replayBtn.addEventListener('pointerup', replayGame);
+  _newGameBtn.addEventListener('pointerup', startNewRound);
+  _enterBtn.addEventListener('pointerup', assignPlayer);
+  _playerBtn.addEventListener('pointerup', determinePlayerO);
+  _aiBtn.addEventListener('pointerup', determinePlayerO);
+
   return {
     getPlayerX,
     getPlayerO,
-    assignPlayer,
-    determinePlayerO,
-    replayGame,
-    startNewRound,
     checkWin
   }
 })();
@@ -418,8 +429,8 @@ const createAi = () => {
   }
   // Board UI
   const _markCell = (randomIndex) => {
-    const cells = document.querySelectorAll('.cell');
-    uiController.markCell(cells[randomIndex], 'O');
+    const _cells = document.querySelectorAll('.cell');
+    uiController.markCell(_cells[randomIndex], 'O');
   }
   // Game logic
   const _updateBoard = (game) => {
@@ -446,13 +457,3 @@ const createAi = () => {
     makeMove
   }
 }
-
-// Setups
-setupController.setFooterYear();
-
-// Event listeners
-replayBtn.addEventListener('pointerup', gameController.replayGame);
-newGameBtn.addEventListener('pointerup', gameController.startNewRound);
-enterBtn.addEventListener('pointerup', gameController.assignPlayer);
-playerBtn.addEventListener('pointerup', gameController.determinePlayerO);
-aiBtn.addEventListener('pointerup', gameController.determinePlayerO);

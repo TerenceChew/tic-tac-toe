@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=JetBrains+Mono&family=Press+Start+2P&family=Silkscreen&family=PT+Mono&display=swap');
 
-:root {
-  --bg-1: rgb(43, 33, 58);
-  --tie-color: rgb(255, 255, 67);
-  --main-pink: rgb(238, 46, 164);
-  --main-orange: rgb(243, 123, 24);
-}
-
 *,
 *::before,
 *::after {
@@ -15,7 +8,14 @@
   box-sizing: border-box;
 }
 
-/* Utility */
+:root {
+  --bg-1: rgb(43, 33, 58);
+  --tie-color: rgb(255, 255, 67);
+  --main-pink: rgb(238, 46, 164);
+  --main-orange: rgb(243, 123, 24);
+}
+
+/* Utilities */
 .flex-column-center {
   display: flex;
   flex-direction: column;
@@ -290,7 +290,7 @@ footer a:hover .fa-github {
   font-size: 1.2rem;
 }
 
-/* Animation */
+/* Animations */
 .controls button,
 .btn-divider-1,
 .btn-divider-2,
