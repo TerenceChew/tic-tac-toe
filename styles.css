@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Gaegu&family=JetBrains+Mono&family=Press+Start+2P&family=Silkscreen&family=PT+Mono&display=swap');
 
 :root {
-  --bg-1: rgb(0, 0, 25);
-  --main-purple: rgb(255, 115, 255);
-  --main-blue: rgb(86, 125, 255);
+  --bg-1: rgb(43, 33, 58);
   --tie-color: rgb(255, 255, 67);
+  --main-pink: rgb(238, 46, 164);
+  --main-orange: rgb(243, 123, 24);
 }
 
 *,
@@ -29,6 +29,7 @@
   align-items: center;
 }
 
+/* Main content */
 body {
   background-color: var(--bg-1);
 }
@@ -49,11 +50,11 @@ h1 {
   font-size: 1.75rem;
   word-spacing: -.55rem;
   color: white;
-  text-shadow: 4px 2px var(--main-blue), -4px -2px var(--main-purple);
+  text-shadow: 4px 2px var(--main-orange), -4px -2px var(--main-pink);
 }
 
 h1:hover {
-  text-shadow: 4px 2px var(--main-purple), -4px -2px var(--main-blue);
+  text-shadow: 4px 2px var(--main-pink), -4px -2px var(--main-orange);
 }
 
 .display {
@@ -70,7 +71,7 @@ h1:hover {
 }
 
 .display-text > span {
-  color: var(--main-blue);
+  color: var(--main-orange);
   font-size: 1.5rem;
   font-family: 'Press Start 2P', cursive;
   vertical-align: sub;
@@ -97,21 +98,21 @@ h1:hover {
 .cell {
   width: 85px;
   height: 85px;
-  color: var(--main-blue);
+  color: var(--main-orange);
   font-family: 'Press Start 2P', cursive;
   font-size: 1.55rem;
   cursor: not-allowed;
 }
 
 .controls {
-  width: min(325px, 70%);
+  width: min(255px, 70%);
   height: 27vh;
   margin: 0 auto;
   gap: 5px;
 }
 
 .controls button {
-  max-width: 75%;
+  max-width: 100%;
   height: 60px;
   border: none;
   font-family: 'Press Start 2P', cursive;
@@ -121,24 +122,30 @@ h1:hover {
   cursor: pointer;
   color: white;
   transition: 1s;
-  animation: w-100 1.5s linear 1s forwards;
+  animation: w-100 1.25s linear 1s forwards;
 }
 
 .controls .replay-btn {
   display: none;
-  border-bottom: 2px solid var(--main-purple);
   padding-top: 5px;
 }
 
-.controls .new-game-btn {
-  border-top: 2px solid var(--main-blue);
+.controls button:hover {
+  animation: w-100 1.25s linear 1s forwards,
+             cycle-color .65s linear infinite alternate-reverse;
+  font-size: 1.2rem;
 }
 
-.controls button:hover {
-  animation: w-100 1s linear 1s forwards,
-             cycle-color .65s linear infinite alternate-reverse;
-  font-size: 1.25rem;
-  max-width: 100%;
+.btn-divider-1,
+.btn-divider-2 {
+  display: none;
+  width: 100%;
+  height: 2px;
+  background-color: yellow;
+}
+
+.btn-divider-2 {
+  display: block;
 }
 
 footer {
@@ -208,7 +215,7 @@ footer a:hover .fa-github {
 
 .player-name-span {
   font-size: 3.45rem;
-  color: var(--main-purple);
+  color: var(--main-pink);
 }
 
 /* Input box */
@@ -245,7 +252,6 @@ footer a:hover .fa-github {
   cursor: pointer;
   color: white;
   transition: 1s;
-  animation: w-100 1.25s linear 1.15s forwards;
 }
 
 .enter-btn:hover {
@@ -254,7 +260,40 @@ footer a:hover .fa-github {
   font-size: 1.25rem;
 }
 
+/* Choose player box */
+.choose-player-box {
+  display: none;
+  width: 70%;
+  gap: 5px;
+}
+
+.choose-player-box button {
+  max-width: 100%;
+  height: 60px;
+  border: none;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.05rem;
+  background-color: var(--bg-1);
+  word-spacing: -.5rem;
+  cursor: pointer;
+  color: white;
+  transition: 1s;
+}
+
+.choose-player-box .player-btn {
+  padding-top: 5px;
+}
+
+.choose-player-box button:hover {
+  animation: w-100 1.25s linear 1.15s forwards,
+             cycle-color .65s linear infinite alternate-reverse;
+  font-size: 1.2rem;
+}
+
+/* Animation */
 .controls button,
+.btn-divider-1,
+.btn-divider-2,
 .form > h2,
 .name-input,
 .enter-btn,
@@ -265,54 +304,21 @@ footer a:hover .fa-github {
   overflow: hidden;
 }
 
+.btn-divider-1,
+.btn-divider-2,
 .form > h2,
-.name-input {
-  animation: w-100 1.25s linear 1.15s forwards;
-}
-
-/* Choose player box */
-.choose-player-box {
-  display: none;
-  width: 75%;
-  gap: 5px;
-}
-
+.name-input,
+.enter-btn,
 .choose-player-box button {
-  max-width: 75%;
-  height: 60px;
-  border: none;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1.05rem;
-  background-color: var(--bg-1);
-  word-spacing: -.5rem;
-  cursor: pointer;
-  color: white;
-  transition: 1s;
   animation: w-100 1.25s linear 1.15s forwards;
-}
-
-.choose-player-box .player-btn {
-  border-bottom: 2px solid var(--main-purple);
-  padding-top: 5px;
-}
-
-.choose-player-box .ai-btn {
-  border-top: 2px solid var(--main-blue);
-}
-
-.choose-player-box button:hover {
-  animation: w-100 1.25s linear 1.15s forwards,
-             cycle-color .65s linear infinite alternate-reverse;
-  font-size: 1.25rem;
-  max-width: 100%;
 }
 
 @keyframes cycle-color {
   from {
-    color: var(--main-blue);
+    color: var(--main-orange);
   }
   to {
-    color: var(--main-purple);
+    color: var(--main-pink);
   }
 }
 
@@ -329,22 +335,22 @@ footer a:hover .fa-github {
   5% {
     border-width: 14px;
     border-style: double;
-    border-color: transparent transparent transparent var(--main-blue);
+    border-color: transparent transparent transparent var(--main-orange);
   }
   25% {
     border-width: 14px;
     border-style: double;
-    border-color: transparent transparent var(--main-blue) transparent;
+    border-color: transparent transparent var(--main-orange) transparent;
   }
   45% {
     border-width: 14px;
     border-style: double;
-    border-color: transparent var(--main-purple) transparent transparent;
+    border-color: transparent var(--main-pink) transparent transparent;
   }
   65% {
     border-width: 14px;
     border-style: double;
-    border-color: var(--main-purple) transparent transparent transparent;
+    border-color: var(--main-pink) transparent transparent transparent;
   }
   85% {
     border: 14px double transparent;
@@ -352,6 +358,6 @@ footer a:hover .fa-github {
   100% {
     border-width: 14px;
     border-style: double;
-    border-color: var(--main-purple) var(--main-purple) var(--main-blue) var(--main-blue);
+    border-color: var(--main-pink) var(--main-pink) var(--main-orange) var(--main-orange);
   }
 }

@@ -5,6 +5,7 @@ const displayTextSpan = document.querySelector('.display-text > span');
 const board = document.querySelector('.board');
 const replayBtn = document.querySelector('.replay-btn');
 const newGameBtn = document.querySelector('.new-game-btn');
+const btnDivider1 = document.querySelector('.btn-divider-1');
 const cells = document.querySelectorAll('.cell');
 
 // Form selectors
@@ -40,7 +41,7 @@ const uiController = (() => {
   const updateDisplayTextSpan = (turn) => {
     displayText.innerText = '';
     displayTextSpan.innerText = turn === 'X' ? gameController.getPlayerX() : gameController.getPlayerO();
-    displayTextSpan.style.color = turn === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
+    displayTextSpan.style.color = turn === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
 
     displayTextSpan.classList.add('animate__animated', 'animate__flash', 'animate__repeat-1');
     displayText.append(displayTextSpan, "'s Turn");
@@ -51,9 +52,9 @@ const uiController = (() => {
     let color;
 
     if (turn === 'X') {
-      color = 'var(--main-blue)';
+      color = 'var(--main-orange)';
     } else if (turn === 'O') {
-      color = 'var(--main-purple)';
+      color = 'var(--main-pink)';
     } else {
       color = 'var(--tie-color)';
     }
@@ -64,6 +65,7 @@ const uiController = (() => {
     displayText.append(displayTextSpan, result === 'TIE' ? ' !' : ' WON !');
     _showReplayBtn();
     _showNewGameBtn();
+    _showBtnDivider();
   }
   // Board
   const _showBoard = () => {
@@ -81,7 +83,7 @@ const uiController = (() => {
   }
   const markCell = (cell, turn) => {
     cell.innerText = turn;
-    cell.style.color = turn === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
+    cell.style.color = turn === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   const _resetCells = () => {
     cells.forEach(cell => {
@@ -100,6 +102,12 @@ const uiController = (() => {
   }
   const hideNewGameBtn = () => {
     newGameBtn.style.display = 'none';
+  }
+  const _showBtnDivider = () => {
+    btnDivider1.style.display = 'block';
+  }
+  const hideBtnDivider = () => {
+    btnDivider1.style.display = 'none';
   }
   // Reset
   const resetGameUi = () => {
@@ -150,7 +158,7 @@ const uiController = (() => {
   const _updatePlayerNameSpan = (player) => {
     playerNameSpan.innerText = '';
     playerNameSpan.innerText = player === 'X' ? 'X' : 'O';
-    playerNameSpan.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
+    playerNameSpan.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   // Input box
   const showInputBox = () => {
@@ -166,7 +174,7 @@ const uiController = (() => {
     }, 100);
   }
   const _updateNameInputColor = (player) => {
-    nameInput.style.color = player === 'X' ? 'var(--main-blue)' : 'var(--main-purple)';
+    nameInput.style.color = player === 'X' ? 'var(--main-orange)' : 'var(--main-pink)';
   }
   const resetNameInputValue = () => {
     nameInput.value = '';
@@ -186,6 +194,7 @@ const uiController = (() => {
     markCell,
     hideReplayBtn,
     hideNewGameBtn,
+    hideBtnDivider,
     showFormX,
     showFormO,
     hideForm,
@@ -293,6 +302,7 @@ const gameController = (() => {
     _makeNewGame();
     uiController.hideReplayBtn();
     uiController.hideNewGameBtn();
+    uiController.hideBtnDivider();
     uiController.resetGameUi();
     uiController.resetNameInputValue();
     uiController.showFormX();
@@ -379,6 +389,7 @@ const gameController = (() => {
     _makeNewGame(getPlayerX(), getPlayerO(), _getMode());
     uiController.hideReplayBtn();
     uiController.hideNewGameBtn();
+    uiController.hideBtnDivider();
     uiController.resetGameUi();
     _startGame();
   }
