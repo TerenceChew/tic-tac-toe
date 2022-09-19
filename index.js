@@ -11,7 +11,7 @@ const setupController = (() => {
 
 const uiController = (() => {
   // Game UI selectors
-  const _container = document.querySelector('._container');
+  const _container = document.querySelector('.container');
   const _displayText = document.querySelector('.display-text');
   const _displayTextSpan = document.querySelector('.display-text > span');
   const _board = document.querySelector('.board');
@@ -21,12 +21,12 @@ const uiController = (() => {
   const _cells = document.querySelectorAll('.cell');
 
   // Form selectors
-  const _formContainer = document.querySelector('.form-_container');
+  const _formContainer = document.querySelector('.form-container');
   const _formTitle = document.querySelector('.form-title');
   const _playerNameSpan = document.querySelector('.player-name-span');
   const _inputBox = document.querySelector('.input-box');
   const _choosePlayerBox = document.querySelector('.choose-player-box');
-  const _nameInputContainer = document.querySelector('.name-input-_container');
+  const _nameInputContainer = document.querySelector('.name-input-container');
   const _nameInput = document.querySelector('.name-input');
 
   // Game UI functions //
