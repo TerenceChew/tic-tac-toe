@@ -235,7 +235,7 @@ const gameController = (() => {
     })
   }
   // Player assignment
-  const _assignPlayerX = () => {
+  const _getPlayerX = () => {
     if (!_nameInput.value || !_nameInput.value.trim()) {
       uiController.resetNameInputValue();
       uiController.resetNameInputContainerAnimation();
@@ -248,7 +248,7 @@ const gameController = (() => {
       uiController.showChoosePlayerBox();
     }
   }
-  const _assignPlayerO = () => {
+  const _getPlayerO = () => {
     if (_game.mode === 'AI') {
       _game.playerO = _game.ai.getName();
       uiController.resetNameInputValue();
@@ -266,18 +266,18 @@ const gameController = (() => {
       uiController.hideForm();
     }
   }
-  const assignPlayer = () => {
+  const _assignPlayersAndStartGame = () => {
     if (!_game.playerX) {
-      _assignPlayerX();
+      _getPlayerX();
     } else {
-      _assignPlayerO();
+      _getPlayerO();
     }
 
     if (!_game.playerX || !_game.playerO) return;
     
     _startGame();
   }
-  const determinePlayerO = (e) => {
+  const _determinePlayerO = (e) => {
     let btnText = e.target.innerText;
 
     if (btnText === 'PLAYER') {
@@ -288,7 +288,7 @@ const gameController = (() => {
       uiController.hideChoosePlayerBox();
       _game.mode = 'AI';
       _game.ai = createAi();
-      assignPlayer();
+      _assignPlayersAndStartGame();
     }
   }
   // Game start
@@ -306,7 +306,7 @@ const gameController = (() => {
       _game.mode = mode;
     }
   }
-  const startNewRound = () => {
+  const _startNewRound = () => {
     _makeNewGame();
     uiController.hideReplayBtn();
     uiController.hideNewGameBtn();
@@ -393,7 +393,7 @@ const gameController = (() => {
     return;
   }
   // Replay
-  const replayGame = () => {
+  const _replayGame = () => {
     _makeNewGame(getPlayerX(), getPlayerO(), _getMode());
     uiController.hideReplayBtn();
     uiController.hideNewGameBtn();
@@ -403,11 +403,11 @@ const gameController = (() => {
   }
 
   // Event listeners
-  _replayBtn.addEventListener('pointerup', replayGame);
-  _newGameBtn.addEventListener('pointerup', startNewRound);
-  _enterBtn.addEventListener('pointerup', assignPlayer);
-  _playerBtn.addEventListener('pointerup', determinePlayerO);
-  _aiBtn.addEventListener('pointerup', determinePlayerO);
+  _replayBtn.addEventListener('pointerup', _replayGame);
+  _newGameBtn.addEventListener('pointerup', _startNewRound);
+  _enterBtn.addEventListener('pointerup', _assignPlayersAndStartGame);
+  _playerBtn.addEventListener('pointerup', _determinePlayerO);
+  _aiBtn.addEventListener('pointerup', _determinePlayerO);
 
   return {
     getPlayerX,
