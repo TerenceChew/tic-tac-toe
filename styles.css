@@ -180,6 +180,8 @@ footer a:hover .fa-github {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  border-width: 14px;
+  border-style: double;
   animation: show-border 1.35s linear forwards;
   overflow-y: scroll;
   background-color: var(--bg-1);
@@ -330,34 +332,24 @@ footer a:hover .fa-github {
 
 @keyframes show-border {
   0% {
-    border: 14px double transparent;
+    border-color: transparent;
   }
   5% {
-    border-width: 14px;
-    border-style: double;
     border-color: transparent transparent transparent var(--main-orange);
   }
   25% {
-    border-width: 14px;
-    border-style: double;
     border-color: transparent transparent var(--main-orange) transparent;
   }
   45% {
-    border-width: 14px;
-    border-style: double;
     border-color: transparent var(--main-pink) transparent transparent;
   }
   65% {
-    border-width: 14px;
-    border-style: double;
     border-color: var(--main-pink) transparent transparent transparent;
   }
   85% {
-    border: 14px double transparent;
+    border-color: transparent;
   }
   100% {
-    border-width: 14px;
-    border-style: double;
     border-color: var(--main-pink) var(--main-pink) var(--main-orange) var(--main-orange);
   }
 }
